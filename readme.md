@@ -14,12 +14,11 @@
 
 - **框架**: Gin
 - **ORM**: GORM
-- **数据库**: SQLite
-- **认证**: JWT
-- **密码加密**: bcrypt
 
 ### 运行步骤
-
+``` bash
 cd blog_system
+
 go mod tidy
+
 go run main.go
