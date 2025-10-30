@@ -1,0 +1,24 @@
+# 服务器配置
+server:
+  port: "8080"
+  mode: "debug" # debug, release, test
+
+# 数据库配置
+database:
+  driver: "sqlite" # sqlite, mysql
+  dsn: "blog.db"   # 对于sqlite是文件路径，对于mysql是连接字符串
+
+# JWT配置
+jwt:
+  secret: "your_very_secure_secret_key_change_in_production"
+  expiration_hours: 24
+
+# 日志配置
+log:
+  level: "info"
+  file: "blog.log" # 日志文件路径，空则输出到控制台
+
+# 应用配置
+app:
+  name: "Blog System"
+  version: "1.0.0"

@@ -12,10 +12,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var JWTSecret []byte
+var (
+	JWTSecret     []byte
+	JWTExpiration time.Duration
+)
 
 func InitAuth(cfg *config.Config) {
-	JWTSecret = []byte(cfg.JWTSecret)
+	JWTSecret = []byte(cfg.JWT.Secret)
+	JWTExpiration = time.Duration(cfg.JWT.ExpirationHours) * time.Hour
 }
 
 func AuthMiddleware() gin.HandlerFunc {
@@ -66,7 +70,7 @@ func GenerateToken(user models.User) (string, error) {
 	claims := jwt.MapClaims{
 		"id":       user.ID,
 		"username": user.Username,
-		"exp":      time.Now().Add(24 * time.Hour).Unix(),
+		"exp":      time.Now().Add(JWTExpiration).Unix(),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
